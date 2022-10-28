@@ -20,7 +20,7 @@ to which port the Arduino described in the experiment setup is plugged into
 Please refer to device manager (or equivalent) in your system properties
 after plugging in Arduino to find out the exact com port
 '''
-arduinoData=serial.Serial('COM7',115200)
+arduinoData=serial.Serial('COM3',115200)
 
 date_string = time.strftime("%d-%m-%y-%H-%M")       #To store current date, used for file names
 
@@ -40,10 +40,6 @@ def is_Int(s):
 
 
 flag=True
-plt.ion()
-plt.interactive(True)
-plt.show()
-
 
 def capture():
     
@@ -60,11 +56,12 @@ def capture():
     count1=0
     myData1=0
     val1=0
+
     while True:
 
         while(arduinoData.inWaiting==0):    #Wait till data is received
             pass
-        
+
         myData1=arduinoData.readline()
         myData1=myData1[:-2:]
 
@@ -110,29 +107,29 @@ def capture():
     saveY = np.asarray(a)
     print(len(saveX))
 
-    #Save readings into a CSV file
-    np.savetxt(date_string + '.csv', saveX, delimiter = ",")
-    np.savetxt(date_string + '.csv', saveY, delimiter = ",")
+    np.savetxt("data/X/" + date_string + '.csv', saveX, delimiter = ",")
+    np.savetxt("data/Y/" + date_string + '.csv', saveY, delimiter = ",")
     plt.plot(time1,a)                       #Plot the data
 
-    plt.grid(True)
-    plt.ylabel('Voltage (in V)')
-    plt.xlabel('Time (in ms) ')
-    plt.title("Lenz Law demonstration")
 
-    plt.show()
+    # plt.show()
     plt.pause(.001)
 
 
 print('Enter the number of plots you need')
 counter = int(input())
+
+plt.grid(True)
+plt.ylabel('Voltage (in V)')
+plt.xlabel('Time (in ms) ')
+plt.title("Lenz Law demonstration")
+
 for i in range(counter):
     print('plot number', i+1, )
     date_string = time.strftime("%d-%m-%y-%H-%M-%S")
     capture()
 
-    #Save image of the plot produced
-    plt.savefig(date_string + '.png')
+plt.show()
 
 input("<Press any key to Exit>")
 exit()
