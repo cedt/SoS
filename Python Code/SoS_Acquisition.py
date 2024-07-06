@@ -113,7 +113,7 @@ def capture():
 
 
     # plt.show()
-    plt.pause(.001)
+    plt.pause(0.1)
 
 
 print('Enter the number of plots you need')
