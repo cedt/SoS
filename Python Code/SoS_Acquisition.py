@@ -12,7 +12,10 @@ import serial
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-
+import os
+# Create directories if they don't exist
+os.makedirs("data/X/", exist_ok=True)
+os.makedirs("data/Y/", exist_ok=True)
 
 '''
 COM Port, The first argument of function below needs to changed according
@@ -113,7 +116,7 @@ def capture():
 
 
     # plt.show()
-    plt.pause(0.1)
+    plt.pause(.001)
 
 
 print('Enter the number of plots you need')
