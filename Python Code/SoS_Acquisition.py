@@ -12,6 +12,10 @@ import serial
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+import os
+# Create directories if they don't exist
+os.makedirs("data/X/", exist_ok=True)
+os.makedirs("data/Y/", exist_ok=True
 
 
 '''
